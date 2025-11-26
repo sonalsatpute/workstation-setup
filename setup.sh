@@ -54,10 +54,10 @@ print_header() {
     echo ""
 }
 
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SETUP_DIR="${DOTFILES_DIR}/setup/${PLATFORM}"
+WORKSTATION_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SETUP_DIR="${WORKSTATION_DIR}/setup/${PLATFORM}"
 
-export DOTFILES_DIR
+export WORKSTATION_DIR
 export PLATFORM
 export -f print_status print_warning print_error print_info
 

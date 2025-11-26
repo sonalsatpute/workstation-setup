@@ -5,7 +5,7 @@
 
 set -e
 
-CONFIG_DIR="$DOTFILES_DIR/config"
+CONFIG_DIR="$WORKSTATION_DIR/config"
 
 print_info "Creating symbolic links for dotfiles..."
 

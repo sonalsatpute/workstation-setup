@@ -17,15 +17,15 @@ detect_platform() {
 }
 
 PLATFORM=$(detect_platform)
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SETUP_DIR="${DOTFILES_DIR}/setup/${PLATFORM}"
+WORKSTATION_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SETUP_DIR="${WORKSTATION_DIR}/setup/${PLATFORM}"
 
 echo "💻 Platform: $PLATFORM"
 echo ""
 
 # Check main setup.sh
-echo "✓ Main setup.sh exists: $([ -f "${DOTFILES_DIR}/setup.sh" ] && echo "YES" || echo "NO")"
-echo "✓ Main setup.sh executable: $([ -x "${DOTFILES_DIR}/setup.sh" ] && echo "YES" || echo "NO")"
+echo "✓ Main setup.sh exists: $([ -f "${WORKSTATION_DIR}/setup.sh" ] && echo "YES" || echo "NO")"
+echo "✓ Main setup.sh executable: $([ -x "${WORKSTATION_DIR}/setup.sh" ] && echo "YES" || echo "NO")"
 echo ""
 
 # Check platform directory
@@ -56,7 +56,7 @@ echo ""
 # Check dotfiles
 echo "📄 Configuration Files:"
 for file in vimrc zshrc gitconfig; do
-    if [ -f "${DOTFILES_DIR}/config/${file}" ]; then
+    if [ -f "${WORKSTATION_DIR}/config/${file}" ]; then
         echo "  ✓ config/${file} - EXISTS"
     else
         echo "  ✗ config/${file} - MISSING"
@@ -67,7 +67,7 @@ echo ""
 # Check documentation
 echo "📚 Documentation:"
 for file in README.md PLATFORM_GUIDE.md; do
-    if [ -f "${DOTFILES_DIR}/${file}" ]; then
+    if [ -f "${WORKSTATION_DIR}/${file}" ]; then
         echo "  ✓ ${file} - EXISTS"
     else
         echo "  ✗ ${file} - MISSING"
@@ -91,7 +91,7 @@ echo ""
 
 # Test help display
 echo "📖 Testing help display..."
-"${DOTFILES_DIR}/setup.sh" 2>&1 | grep -q "Available categories:" && echo "  ✓ Help display works" || echo "  ✗ Help display failed"
+"${WORKSTATION_DIR}/setup.sh" 2>&1 | grep -q "Available categories:" && echo "  ✓ Help display works" || echo "  ✗ Help display failed"
 echo ""
 
 echo "================================"
