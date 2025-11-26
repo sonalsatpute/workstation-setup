@@ -1,15 +1,15 @@
-# Dotfiles
+# Workstation Setup
 
-My personal Ubuntu/Linux development environment setup - modular and category-wise.
+Cross-platform development environment setup for Linux, macOS, and Windows.
 
-## 🚀 Quick Setup (New Machine)
+## 🚀 Quick Setup
 
 ```bash
 # Clone this repository
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/sonalsatpute/workstation-setup.git
+cd workstation-setup
 
-# Install everything
+# Install everything (auto-detects your platform)
 ./setup.sh all
 
 # Or install specific categories
@@ -40,29 +40,37 @@ For detailed cross-platform information, see [PLATFORM_GUIDE.md](PLATFORM_GUIDE.
 ## 📂 Structure
 
 ```
-dotfiles/
-├── setup.sh              # Main orchestrator
-├── setup/                # Category-specific scripts
-│   ├── system.sh
-│   ├── shell.sh
-│   ├── development.sh
-│   ├── devops.sh
-│   ├── cloud.sh
-│   ├── productivity.sh
-│   ├── editors.sh
-│   ├── ides.sh
-│   ├── jetbrains.sh
-│   ├── modern-tools.sh
-│   └── dotfiles.sh
-├── config/               # Configuration files
-    ├── vimrc
-    ├── zshrc
-    └── gitconfig
+workstation-setup/
+├── setup.sh                 # Main orchestrator (auto-detects platform)
+├── setup/
+│   ├── linux/              # Linux-specific scripts
+│   │   ├── system.sh
+│   │   ├── shell.sh
+│   │   ├── development.sh
+│   │   ├── devops.sh
+│   │   ├── cloud.sh
+│   │   ├── productivity.sh
+│   │   ├── editors.sh
+│   │   ├── ides.sh
+│   │   ├── jetbrains.sh
+│   │   ├── modern-tools.sh
+│   │   └── dotfiles.sh
+│   ├── macos/              # macOS scripts (coming soon)
+│   └── windows/            # Windows scripts (coming soon)
+├── config/                 # Shared configuration files
+│   ├── vimrc
+│   ├── zshrc
+│   └── gitconfig
+├── README.md
+├── PLATFORM_GUIDE.md
+└── verify.sh
 ```
 
 ## 📦 Categories Explained
 
-### Linux (Fully Implemented)
+### 🐧 Linux (Fully Implemented)
+
+All categories below are fully functional for Ubuntu/Debian-based distributions.
 
 **System & Shell**
 - `system` - Essential packages (build-essential, curl, wget, git, vim, htop, etc.)
@@ -83,8 +91,12 @@ dotfiles/
 **Configuration**
 - `dotfiles` - Symlinks vimrc, zshrc, gitconfig to home directory
 
-### macOS & Windows (Coming Soon)
-Setup scripts will use platform-native package managers (Homebrew for macOS, Chocolatey/WSL for Windows).
+### 🍎 macOS (Coming Soon)
+Will use Homebrew as primary package manager with native macOS applications where available.
+
+### 🪟 Windows (Coming Soon)
+**Option 1 (Recommended):** WSL2 - Run Linux scripts directly in Windows Subsystem for Linux  
+**Option 2:** Native Windows - Use Chocolatey package manager with Windows-native applications
 
 ## 🔧 Configuration Files
 
@@ -94,6 +106,16 @@ All config files in `config/` are cross-platform compatible:
 - **zshrc** - Works on Linux, macOS, and Windows WSL
 
 See [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md) for detailed compatibility information.
+
+## 💻 Platform Support
+
+| Platform | Status | Package Manager | Notes |
+|----------|--------|-----------------|-------|
+| **Linux** | ✅ Full | apt, snap | Ubuntu 22.04+ tested |
+| **macOS** | 🚧 Planned | Homebrew | Coming soon |
+| **Windows** | 🚧 Planned | Chocolatey/WSL | WSL2 recommended |
+
+The setup script automatically detects your platform and runs the appropriate installation scripts.
 
 ## 🚀 Usage Examples
 
@@ -130,8 +152,21 @@ These values are stored in your local `~/.gitconfig` and won't be pushed to the 
 
 ## 🎨 Customization
 
+### Configuration Files
+
+All configuration files are located in `config/` and are cross-platform compatible:
+- `config/vimrc` - Vim configuration (works on all platforms)
+- `config/zshrc` - Zsh configuration (Linux/macOS/WSL)
+- `config/gitconfig` - Git configuration (works on all platforms)
+
+### Platform-Specific Customization
+
+**Linux:** Edit scripts in `setup/linux/`  
+**macOS:** Edit scripts in `setup/macos/` (when available)  
+**Windows:** Edit scripts in `setup/windows/` (when available)
+
 ### Vim
-Edit `~/dotfiles/vimrc` to customize vim settings.
+Edit `config/vimrc` to customize vim settings.
 
 **Key bindings:**
 - `Space` is the leader key
@@ -154,7 +189,7 @@ Edit `~/dotfiles/vimrc` to customize vim settings.
 - Return to last edit position when reopening files
 
 ### Zsh Theme
-Edit `ZSH_THEME` in `~/dotfiles/zshrc` to change theme.
+Edit `ZSH_THEME` in `config/zshrc` to change theme.
 
 **Popular themes:**
 - `robbyrussell` (default)
@@ -169,21 +204,23 @@ The setup already includes VS Code shell integration in `.zshrc`:
 
 This enables command decorations and better terminal integration in VS Code.
 
-## 🔄 Updating Dotfiles
+## 🔄 Updating Configuration
 
 When you make changes to your configs on your current machine:
 
 ```bash
-# Copy updated configs back to dotfiles repo
-cp ~/.vimrc ~/dotfiles/vimrc
-cp ~/.zshrc ~/dotfiles/zshrc
+# Navigate to your repo
+cd ~/workstation-setup
+
+# Copy updated configs back
+cp ~/.vimrc config/vimrc
+cp ~/.zshrc config/zshrc
 
 # Note: Don't copy gitconfig if it contains your personal info!
 # The repo version has placeholders which is what you want.
 
 # Commit and push
-cd ~/dotfiles
-git add vimrc zshrc
+git add config/
 git commit -m "Update configs"
 git push
 ```
@@ -207,35 +244,8 @@ git push
 
 ### Zsh
 - `Ctrl + R` - Search command history with fzf (fuzzy search)
-- `cat > ~/dotfiles/gitconfig << 'EOF'
-[credential]
-        credentialStore = gpg
-        helper = manager
-        guiPrompt = false
-[user]
-        # Set these after cloning on new machine:
-        # git config --global user.email "your.email@example.com"
-        # git config --global user.name "Your Name"
-        email = REPLACE_WITH_YOUR_EMAIL
-        name = REPLACE_WITH_YOUR_NAME
-[core]
-        autocrlf = input
-        editor = vi
-EOF` - Repeat last command
-- `[credential]
-        credentialStore = gpg
-        helper = manager
-        guiPrompt = false
-[user]
-        # Set these after cloning on new machine:
-        # git config --global user.email "your.email@example.com"
-        # git config --global user.name "Your Name"
-        email = REPLACE_WITH_YOUR_EMAIL
-        name = REPLACE_WITH_YOUR_NAME
-[core]
-        autocrlf = input
-        editor = vi
-EOF` - Last argument from previous command
+- `!!` - Repeat last command
+- `!$` - Last argument from previous command
 - `Alt + .` - Insert last argument from previous command
 - `cd -` - Go to previous directory
 
@@ -244,18 +254,22 @@ EOF` - Last argument from previous command
 - `:wq` - Traditional save and quit
 - `ZZ` - Quick save and quit (in normal mode)
 
-## 📝 What Gets Installed
+## 📝 What Gets Installed (Linux)
 
-The `setup.sh` script will:
-1. Update system packages
+The `setup.sh all` command on Linux will:
+1. Update system packages (apt)
 2. Install essential development tools
 3. Install and configure Oh My Zsh
 4. Install zsh plugins (autosuggestions, syntax-highlighting)
 5. Create symbolic links to your config files
-6. Set zsh as your default shell
+6. Set zsh as your default shell (if not already)
 7. Backup any existing config files to `*.backup`
 
-## �� Troubleshooting
+For other platforms, the installation process will be adapted to use platform-native tools.
+
+## 🔧 Troubleshooting
+
+### All Platforms
 
 **Shell didn't change to zsh?**
 ```bash
@@ -267,7 +281,7 @@ chsh -s $(which zsh)
 Make sure the `vimrc` is properly linked:
 ```bash
 ls -la ~/.vimrc
-# Should show: .vimrc -> /home/youruser/dotfiles/vimrc
+# Should show a symlink to workstation-setup/config/vimrc
 ```
 
 **Plugins not loading in zsh?**
