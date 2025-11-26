@@ -1,0 +1,13 @@
+[credential]
+        credentialStore = gpg
+        helper = manager
+        guiPrompt = false
+[user]
+        # Set these after cloning on new machine:
+        # git config --global user.email "your.email@example.com"
+        # git config --global user.name "Your Name"
+        email = REPLACE_WITH_YOUR_EMAIL
+        name = REPLACE_WITH_YOUR_NAME
+[core]
+        autocrlf = input
+        editor = vi

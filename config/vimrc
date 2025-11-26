@@ -1,0 +1,190 @@
+" ============================================================================
+" VIM Configuration - Enhanced Setup
+" ============================================================================
+
+" Basic Settings
+set nocompatible              " Disable vi compatibility
+set encoding=utf-8            " Set encoding
+
+" ============================================================================
+" Visual Enhancements
+" ============================================================================
+syntax on                     " Enable syntax highlighting
+set number                    " Show line numbers
+set relativenumber            " Show relative line numbers (great for movement)
+set cursorline                " Highlight current line
+set showmatch                 " Show matching brackets
+set matchtime=2               " Bracket match blink time (tenths of second)
+set colorcolumn=80,120        " Show vertical line at 80 and 120 columns
+set laststatus=2              " Always show status line
+set ruler                     " Show cursor position
+set showcmd                   " Show command in bottom bar
+set wildmenu                  " Visual autocomplete for command menu
+set wildmode=longest:full,full " Command completion behavior
+
+" ============================================================================
+" Search Settings
+" ============================================================================
+set hlsearch                  " Highlight search results
+set incsearch                 " Incremental search
+set ignorecase                " Case insensitive search
+set smartcase                 " Case sensitive if uppercase present
+
+" ============================================================================
+" Indentation & Formatting
+" ============================================================================
+set autoindent                " Auto indent
+set smartindent               " Smart indent
+set tabstop=4                 " Tab width
+set shiftwidth=4              " Indent width
+set expandtab                 " Use spaces instead of tabs
+set smarttab                  " Smart tab behavior
+filetype plugin indent on     " Enable file type detection
+
+" ============================================================================
+" Editing Behavior
+" ============================================================================
+set backspace=indent,eol,start " Backspace behavior
+set esckeys                   " Allow arrow keys in insert mode
+set mouse=a                   " Enable mouse support
+set clipboard=unnamedplus     " Use system clipboard
+set hidden                    " Allow hidden buffers
+set history=1000              " Command history size
+set undolevels=1000           " Undo history size
+
+" ============================================================================
+" Performance & Files
+" ============================================================================
+set lazyredraw                " Don't redraw during macros
+set ttyfast                   " Fast terminal connection
+set updatetime=300            " Faster completion
+set timeoutlen=500            " Faster key sequence completion
+set nobackup                  " No backup files
+set nowritebackup             " No backup before overwriting
+set noswapfile                " No swap files
+
+" ============================================================================
+" Splits & Windows
+" ============================================================================
+set splitbelow                " Horizontal split below
+set splitright                " Vertical split right
+
+" ============================================================================
+" Code Folding
+" ============================================================================
+set foldenable                " Enable folding
+set foldlevelstart=10         " Open most folds by default
+set foldnestmax=10            " Max nested folds
+set foldmethod=indent         " Fold based on indent
+
+" ============================================================================
+" Key Mappings
+" ============================================================================
+" Set leader key to space
+let mapleader = " "
+
+" Clear search highlighting with <leader><space>
+nnoremap <leader><space> :nohlsearch<CR>
+
+" Quick save with <leader>w
+nnoremap <leader>w :w<CR>
+
+" Quick quit with <leader>q
+nnoremap <leader>q :q<CR>
+
+" Move vertically by visual line (wrapped lines)
+nnoremap j gj
+nnoremap k gk
+
+" Move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" Disable arrow keys in normal mode (learn hjkl!)
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" nnoremap <left> <nop>
+" nnoremap <right> <nop>
+
+" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Resize windows with arrow keys
+nnoremap <C-Up> :resize +2<CR>
+nnoremap <C-Down> :resize -2<CR>
+nnoremap <C-Left> :vertical resize -2<CR>
+nnoremap <C-Right> :vertical resize +2<CR>
+
+" Tab navigation
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>th :tabprev<CR>
+nnoremap <leader>tl :tabnext<CR>
+
+" Buffer navigation
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bd :bdelete<CR>
+
+" ============================================================================
+" Auto Commands
+" ============================================================================
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" ============================================================================
+" File Type Specific Settings
+" ============================================================================
+" Python
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+
+" JavaScript/TypeScript
+autocmd FileType javascript,typescript setlocal tabstop=2 shiftwidth=2 expandtab
+
+" HTML/CSS
+autocmd FileType html,css setlocal tabstop=2 shiftwidth=2 expandtab
+
+" YAML
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
+
+" Markdown
+autocmd FileType markdown setlocal wrap linebreak
+
+" C#
+autocmd FileType cs setlocal tabstop=4 shiftwidth=4 expandtab
+
+" ============================================================================
+" Status Line
+" ============================================================================
+set statusline=
+set statusline+=\ %f                       " File path
+set statusline+=\ %m                       " Modified flag
+set statusline+=\ %r                       " Readonly flag
+set statusline+=%=                         " Right align
+set statusline+=\ %y                       " File type
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding} " Encoding
+set statusline+=\ [%{&fileformat}]         " File format
+set statusline+=\ %p%%                     " Percentage through file
+set statusline+=\ %l:%c                    " Line:Column
+set statusline+=\
+
+" ============================================================================
+" Colors & Theme (uncomment preferred scheme)
+" ============================================================================
+" colorscheme desert
+" colorscheme slate
+" colorscheme pablo
+set background=dark
+
+" Make background transparent (if terminal supports it)
+" highlight Normal ctermbg=NONE
+" highlight NonText ctermbg=NONE
