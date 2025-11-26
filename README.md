@@ -114,7 +114,7 @@ See [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md) for detailed compatibility informatio
 
 | Platform | Status | Package Manager | Notes |
 |----------|--------|-----------------|-------|
-| **Linux** | ✅ Full | apt, snap | Ubuntu 22.04+ tested |
+| **Linux** | ✅ Full | apt, snap | Ubuntu 24.04+ testing in progress |
 | **macOS** | 🚧 Planned | Homebrew | Coming soon |
 | **Windows** | 🚧 Planned | Chocolatey/WSL | WSL2 recommended |
 
