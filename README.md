@@ -33,6 +33,7 @@ cd workstation-setup
 | **ides** | IntelliJ IDEA Community, DBeaver (free) |
 | **jetbrains** | Rider, DataGrip, dotMemory, dotCover (license required) |
 | **modern-tools** | bat, lazygit, lazydocker, fd, dust |
+| **ai-tools** | GitHub Copilot CLI, SpecKit, Claude Code, SuperClaude, Gemini CLI, AgentOS |
 | **dotfiles** | Symlink configuration files |
 
 For detailed cross-platform information, see [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md).
@@ -54,6 +55,7 @@ workstation-setup/
 │   │   ├── ides.sh
 │   │   ├── jetbrains.sh
 │   │   ├── modern-tools.sh
+│   │   ├── ai-tools.sh
 │   │   └── dotfiles.sh
 │   ├── macos/              # macOS scripts (coming soon)
 │   └── windows/            # Windows scripts (coming soon)
@@ -87,6 +89,7 @@ All categories below are fully functional for Ubuntu/Debian-based distributions.
 - `ides` - IntelliJ IDEA Community, DBeaver Community (free)
 - `jetbrains` - IDEA Ultimate, Rider, DataGrip, dotMemory, dotCover (requires license)
 - `modern-tools` - bat, lazygit, lazydocker, fd, dust
+- `ai-tools` - GitHub Copilot CLI, SpecKit, Claude Code, SuperClaude, Gemini CLI, AgentOS
 
 **Configuration**
 - `dotfiles` - Symlinks vimrc, zshrc, gitconfig to home directory

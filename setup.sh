@@ -73,6 +73,7 @@ declare -A CATEGORIES=(
     ["ides"]="IDEs (IntelliJ IDEA Community, DBeaver)"
     ["jetbrains"]="JetBrains IDEs (IDEA Ultimate, Rider, DataGrip, dotMemory, dotCover) - Requires license"
     ["modern-tools"]="Modern CLI tools (bat, lazygit, lazydocker, etc.)"
+    ["ai-tools"]="AI CLI tools (Copilot, SpecKit, Claude Code, SuperClaude, Gemini, AgentOS)"
     ["dotfiles"]="Link dotfiles to home directory"
 )
 
