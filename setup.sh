@@ -47,17 +47,37 @@ print_info() {
 }
 
 print_header() {
+    local text="$1"
+    local text_length=${#text}
+    local min_width=60
+    local box_width=$((text_length + 4))
+    
+    # Ensure minimum width
+    if [ $box_width -lt $min_width ]; then
+        box_width=$min_width
+    fi
+    
+    local padding_total=$((box_width - text_length - 2))
+    local padding_left=$((padding_total / 2))
+    local padding_right=$((padding_total - padding_left))
+    
+    local line=$(printf '═%.0s' $(seq 1 $box_width))
+    local spaces_left=$(printf ' %.0s' $(seq 1 $padding_left))
+    local spaces_right=$(printf ' %.0s' $(seq 1 $padding_right))
+    
     echo ""
-    echo -e "${BLUE}╔══════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║${NC} $1"
-    echo -e "${BLUE}╚══════════════════════════════════════════════════════════╝${NC}"
+    echo -e "${BLUE}╔${line}╗${NC}"
+    echo -e "${BLUE}║${NC}${spaces_left}${text}${spaces_right}${BLUE}║${NC}"
+    echo -e "${BLUE}╚${line}╝${NC}"
     echo ""
 }
 
 WORKSTATION_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SETUP_DIR="${WORKSTATION_DIR}/setup/${PLATFORM}"
+CONFIG_DIR="${WORKSTATION_DIR}/config"
 
 export WORKSTATION_DIR
+export CONFIG_DIR
 export PLATFORM
 export -f print_status print_warning print_error print_info
 
@@ -111,7 +131,7 @@ run_setup() {
 
 # Main execution
 echo "🚀 Workstation Setup - Multi-Platform Installation"
-echo "📁 Dotfiles directory: $DOTFILES_DIR"
+echo "📁 Config directory: $CONFIG_DIR"
 echo "💻 Platform: $PLATFORM"
 echo ""
 
